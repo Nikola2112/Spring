@@ -1,0 +1,26 @@
+/* Определение стилей для поля ввода content */
+.content-input {
+    width: 35%; /* Ширина поля ввода будет 100% относительно его контейнера */
+    padding: 32px; /* Отступы внутри поля ввода */
+    font-size: 16px; /* Размер шрифта */
+    border: 1px solid #ccc; /* Граничная линия серого цвета */
+    border-radius: 5px; /* Скругление углов */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Тень поля ввода */
+    outline: none; /* Убирает рамку фокуса (подсвечивание при клике) */
+}
+
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}

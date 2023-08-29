@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Note List</title>
+</head>
+<body>
+<h2>Create New Note</h2>
+<form th:action="@{/note/edit}" method="post" th:object="${newNote}">
+    <label>Title: <input type="text" th:field="*{title}" /></label><br>
+    <label>Content: <input type="text" th:field="*{content}" /></label><br>
+    <button type="submit">Create Note</button>
+</form>
+<h1>Note List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through the list of notes and display them -->
+    <tr th:each="note : ${noteList}">
+        <td th:text="${note.id}"></td>
+        <td th:text="${note.title}"></td>
+        <td th:text="${note.content}"></td>
+        <td><a th:href="@{/note/edit(id=${note.id})}"><button>Edit</button></a></td>
+        <td>
+            <form th:action="@{/note/delete(id=${note.id})}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
+
+

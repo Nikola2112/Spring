@@ -2,12 +2,16 @@ package com.goit.Spring.Boot.services;
 
 import com.goit.Spring.Boot.entities.Note;
 import com.goit.Spring.Boot.services.impl.NoteServiceImpl;
+import lombok.Data;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 import java.util.LinkedList;
 import java.util.List;
 
 @Service
 public class NoteService implements NoteServiceImpl {
+
+
     private final List<Note> noteList = new LinkedList<>();
     private Long nextId = 1L;
 
