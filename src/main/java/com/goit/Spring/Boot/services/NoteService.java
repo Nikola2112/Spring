@@ -21,8 +21,8 @@ public class NoteService implements NoteServiceImpl {
     }
 
     @Override
-    public Note add(Note note) {
-        note.getId(nextId);
+    public Note createNote(Note note) {
+        note.setId(nextId);
         nextId++;
         noteList.add(note);
         return note;
@@ -31,7 +31,7 @@ public class NoteService implements NoteServiceImpl {
 
     @Override
     public void deleteById(long id) {
-        noteList.removeIf(note -> note.getId() == id);
+        noteList.removeIf(note -> note.getId().equals(id));
     }
 
     @Override

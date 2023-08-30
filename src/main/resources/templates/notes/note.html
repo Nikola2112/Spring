@@ -5,7 +5,7 @@
 </head>
 <body>
 <h2>Create New Note</h2>
-<form th:action="@{/note/edit}" method="post" th:object="${newNote}">
+<form th:action="@{/note/create}" method="post" th:object="${newNote}">
     <label>Title: <input type="text" th:field="*{title}" /></label><br>
     <label>Content: <input type="text" th:field="*{content}" /></label><br>
     <button type="submit">Create Note</button>
@@ -23,11 +23,11 @@
     </thead>
     <tbody>
     <!-- Loop through the list of notes and display them -->
-    <tr th:each="note : ${noteList}">
+    <tr th:each="note : ${note}">
         <td th:text="${note.id}"></td>
         <td th:text="${note.title}"></td>
         <td th:text="${note.content}"></td>
-        <td><a th:href="@{/note/edit(id=${note.id})}"><button>Edit</button></a></td>
+        <td><a th:href="@{/notes/edit}"><button>Edit</button></a></td>
         <td>
             <form th:action="@{/note/delete(id=${note.id})}" method="post">
                 <button type="submit">Delete</button>
