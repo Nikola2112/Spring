@@ -27,7 +27,7 @@
         <td th:text="${note.id}"></td>
         <td th:text="${note.title}"></td>
         <td th:text="${note.content}"></td>
-        <td><a th:href="@{/notes/edit}"><button>Edit</button></a></td>
+        <td><a th:href="@{/note/edit(id=${note.id})}"><button>Edit</button></a></td>
         <td>
             <form th:action="@{/note/delete(id=${note.id})}" method="post">
                 <button type="submit">Delete</button>
