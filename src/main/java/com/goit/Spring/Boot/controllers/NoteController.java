@@ -1,13 +1,15 @@
 package com.goit.Spring.Boot.controllers;
 
+import com.goit.Spring.Boot.services.NoteService;
 import org.springframework.ui.Model;
 import com.goit.Spring.Boot.entities.Note;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import com.goit.Spring.Boot.services.NoteService;
+//import com.goit.Spring.Boot.trash.NoteService1;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -31,13 +33,13 @@ public class NoteController {
 
     @PostMapping("/create")
     public String createNote(@ModelAttribute Note newNote) {
-        noteService.createNote(newNote);
+       noteService.creatNote(newNote);
         return "redirect:/note";
     }
 
     @GetMapping("/edit")
     public String editNote(@RequestParam("id") long id, Model model) {
-        Note note = noteService.getById(id);
+        Optional<Note> note = noteService.getById(id);
         model.addAttribute("note", note);
         return "notes/edit";
     }
@@ -57,37 +59,3 @@ public class NoteController {
 
 
 
-/*@Controller()
-@RequestMapping("/note")
-public class NoteController {
-    private final NoteService noteService;
-   @Autowired
-    public NoteController(NoteService noteService) {
-        this.noteService = noteService;
-    }
-    @GetMapping("/list")
-    public String listNotes(Model model) {
-        model.addAttribute("note", noteService.listAll());
-        return "note/list";
-    }
-    @PostMapping("/delete")
-    public String deleteNote(@RequestParam Long id, Model model) {
-        noteService.deleteById(id);
-        return "redirect:/note/list";
-       // public RedirectView deleteNote(@PathVariable ("id") Long id,@RequestParam Model model)
-        // return new RedirectView("/note/list");
-    }
-    @GetMapping("/edit/{id}")
-    public String editNote(@PathVariable ("id") Long id,@RequestParam Model model){
-       noteService.getById(id);
-
-       return "note/editNote";
-    }
-    @PostMapping("/edit/note")
-    public String saveEditNote(@RequestParam Long id ,Note editNote){
-       noteService.update(editNote);
-
-       return "redirect: /note/list";
-    }
-}
-*/

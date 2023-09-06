@@ -1,4 +1,4 @@
-package com.goit.Spring.Boot.services.impl;
+package com.goit.Spring.Boot.trash.impl;
 
 import com.goit.Spring.Boot.entities.Note;
 

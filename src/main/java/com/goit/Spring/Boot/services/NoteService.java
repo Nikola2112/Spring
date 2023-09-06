@@ -1,56 +1,37 @@
 package com.goit.Spring.Boot.services;
 
 import com.goit.Spring.Boot.entities.Note;
-import com.goit.Spring.Boot.services.impl.NoteServiceImpl;
-import lombok.Data;
-import lombok.Getter;
+import com.goit.Spring.Boot.repository.NoteRepository;
 import org.springframework.stereotype.Service;
-import java.util.LinkedList;
+
 import java.util.List;
+import java.util.Optional;
+
 
 @Service
-public class NoteService implements NoteServiceImpl {
+public class NoteService {
+    private final NoteRepository repository;
 
-
-    private final List<Note> noteList = new LinkedList<>();
-    private Long nextId = 1L;
-
-    @Override
-    public List<Note> listAll() {
-        return noteList;
+    public NoteService(NoteRepository repository) {
+        this.repository = repository;
     }
 
-    @Override
-    public Note createNote(Note note) {
-        note.setId(nextId);
-        nextId++;
-        noteList.add(note);
-        return note;
-
+    public List<Note> listAll(){
+        return (List<Note>) repository.findAll();
     }
 
-    @Override
-    public void deleteById(long id) {
-        noteList.removeIf(note -> note.getId().equals(id));
+    public Note creatNote(Note note){
+        return  repository.save(note);
+    }
+    public void deleteById(Long id){
+        repository.deleteById(id);
+    }
+    public Optional<Note> getById(Long id){
+        return repository.findById(id);
+    }
+    public Note update(Note note){
+        return repository.save(note);
     }
 
-    @Override
-    public void update(Note note) {
-        for (int i = 0; i < noteList.size(); i++) {
-            if (noteList.get(i).getId().equals(note.getId())) {
-                noteList.set(i, note);
-                return;
-            }
-        }
-    }
 
-    @Override
-    public Note getById(long id) {
-        for (Note note : noteList) {
-            if (note.getId() == id) {
-                return note;
-            }
-        }
-        return null;
-    }
-     }
+}
