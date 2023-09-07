@@ -1,17 +1,16 @@
 package com.goit.Spring.Boot.controllers;
 
+
 import com.goit.Spring.Boot.services.NoteService;
 import org.springframework.ui.Model;
 import com.goit.Spring.Boot.entities.Note;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-//import com.goit.Spring.Boot.trash.NoteService1;
+
 
 import java.util.List;
 import java.util.Optional;
-
-
 @Controller
 @RequestMapping("/note")
 public class NoteController {
@@ -56,6 +55,5 @@ public class NoteController {
         return "redirect:/note";
     }
 }
-
 
 
