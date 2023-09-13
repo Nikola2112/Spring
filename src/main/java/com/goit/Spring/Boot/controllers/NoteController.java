@@ -22,37 +22,41 @@ public class NoteController {
         this.noteService = noteService;
     }
 
-    @GetMapping()
+    @GetMapping("/list")
     public String listNotes(Model model) {
-        List<Note> notes = noteService.listAll();
-        model.addAttribute("note",  notes);
+        List<Note> note = noteService.listAll();
+        model.addAttribute("note",  note);
         model.addAttribute("newNote", new Note());
-        return "notes/note";
+        return "main-page";//notes/note
+    }
+    @GetMapping("/create")
+    public String createNote() {
+        return "creating-new-node-page";
     }
 
     @PostMapping("/create")
     public String createNote(@ModelAttribute Note newNote) {
        noteService.creatNote(newNote);
-        return "redirect:/note";
+        return "redirect:/note/list";
     }
 
     @GetMapping("/edit")
     public String editNote(@RequestParam("id") long id, Model model) {
         Optional<Note> note = noteService.getById(id);
         model.addAttribute("note", note);
-        return "notes/edit";
+        return "edit-page";
     }
 
     @PostMapping("/edit")
     public String updateNote(@ModelAttribute("note") Note note) {
         noteService.update(note);
-        return "redirect:/note";
+        return "redirect:/note/list";
     }
 
     @PostMapping("/delete")
     public String deleteNote(@RequestParam("id") long id) {
         noteService.deleteById(id);
-        return "redirect:/note";
+        return "redirect:/note/list";
     }
 }
 

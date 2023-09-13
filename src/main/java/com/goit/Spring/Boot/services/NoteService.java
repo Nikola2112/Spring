@@ -1,7 +1,7 @@
 package com.goit.Spring.Boot.services;
 
 import com.goit.Spring.Boot.entities.Note;
-import com.goit.Spring.Boot.repository.NoteRepository;
+import com.goit.Spring.Boot.trash.repository.NoteRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

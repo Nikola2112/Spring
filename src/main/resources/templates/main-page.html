@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    #notes-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .note {
+      background-color: #f4f4f4;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .note-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .edit-link {
+      text-decoration: none;
+    }
+
+    .note-content {
+      white-space: pre-line;
+    }
+
+  </style>
+</head>
+<body>
+<div id="notes-container">
+  <h1 class="text-center mb-4">My Notes</h1>
+  <div class="form-group text-center">
+    <form th:action="@{/note/create}" method="get">
+      <input type="submit" value="Create note" class="btn btn-primary">
+    </form>
+  </div>
+  <div th:each="note : ${note}" class="note">
+    <h2 th:text="${note.title}"></h2>
+    <p th:text="${note.content}" class="note-content"></p>
+    <div class="note-buttons">
+      <a th:href="@{/note/edit(id=${note.id})}" class="edit-link btn btn-primary">Edit</a>
+      <form th:action="@{'/note/delete?id=' + ${note.id}}" method="post">
+        <input type="submit" value="Delete" class="btn btn-danger">
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
