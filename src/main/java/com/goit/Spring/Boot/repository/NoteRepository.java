@@ -1,4 +1,4 @@
-package com.goit.Spring.Boot.trash.repository;
+package com.goit.Spring.Boot.repository;
 
 import com.goit.Spring.Boot.entities.Note;
 import org.springframework.data.jpa.repository.JpaRepository;
