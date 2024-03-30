@@ -16,49 +16,98 @@
       margin: 0 auto;
     }
 
-    .note {
-      background-color: #f4f4f4;
-      padding: 20px;
-      margin: 20px 0;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .note-buttons {
+    .search-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 20px;
+    }
+
+    #search {
+      flex-grow: 1; /* Take up remaining space */
+      margin-right: 10px; /* Add some spacing */
+    }
+
+    .create-note-btn {
+      margin-left: 10px; /* Add some spacing */
+    }
+
+    .note-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .note-table th, .note-table td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+
+    .toggle-note-btn {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .note-buttons {
       margin-top: 10px;
     }
 
-    .edit-link {
-      text-decoration: none;
+    .note-buttons .btn {
+      margin-right: 5px;
     }
 
-    .note-content {
-      white-space: pre-line;
+    .collapsed {
+      display: none;
     }
-
   </style>
 </head>
 <body>
 <div id="notes-container">
-  <h1 class="text-center mb-4">My Notes</h1>
-  <div class="form-group text-center">
+  <h1>My Notes</h1>
+  <div class="search-container">
+    <form action="/note/search" method="get">
+      <input type="text" id="search" name="keyword" placeholder="Search...">
+      <button type="submit" class="btn btn-primary create-note-btn">Search</button>
+    </form>
+    <form th:action="@{/note/search}" method="get">
+      <button class="btn btn-primary create-note-btn">Go to main page</button>
+    </form>
     <form th:action="@{/note/create}" method="get">
-      <input type="submit" value="Create note" class="btn btn-primary">
+    <button class="btn btn-primary create-note-btn">Create note</button>
     </form>
   </div>
-  <div th:each="note : ${note}" class="note">
-    <h2 th:text="${note.title}"></h2>
-    <p th:text="${note.content}" class="note-content"></p>
-    <div class="note-buttons">
-      <a th:href="@{/note/edit(id=${note.id})}" class="edit-link btn btn-primary">Edit</a>
-      <form th:action="@{'/note/delete?id=' + ${note.id}}" method="post">
-        <input type="submit" value="Delete" class="btn btn-danger">
-      </form>
-    </div>
-  </div>
+  <table class="note-table">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over notes and populate table rows -->
+    <tr th:each="note : ${note}" class="note">
+      <td th:text="${note.title}"></td>
+      <td>
+        <p class="note-content" th:text="${note.content}" style="display: none;"></p>
+        <button class="toggle-note-btn" onclick="var content = this.parentElement.querySelector('.note-content'); content.style.display = content.style.display === 'none' ? 'block' : 'none';">Show note</button>
+      </td>
+      <td>
+        <div class="note-buttons">
+          <a th:href="@{/note/edit(id=${note.id})}" class="edit-link btn btn-primary">Edit</a>
+          <form th:action="@{'/note/delete?id=' + ${note.id}}" method="post">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

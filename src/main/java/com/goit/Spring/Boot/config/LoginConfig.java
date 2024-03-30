@@ -37,7 +37,7 @@ public class LoginConfig {
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/note/list")
+                        .defaultSuccessUrl("/note/search")
                         .permitAll()
                         .failureHandler(authenticationFail))
                 .build();
@@ -52,3 +52,4 @@ public class LoginConfig {
         ;
     }
 }
+

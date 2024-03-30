@@ -2,33 +2,22 @@ package com.goit.Spring.Boot.controllers;
 
 
 import com.goit.Spring.Boot.services.NoteService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import com.goit.Spring.Boot.entities.Note;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.util.List;
 import java.util.Optional;
+
 @Controller
 @RequestMapping("/note")
+@RequiredArgsConstructor
 public class NoteController {
 
     private final NoteService noteService;
 
-    @Autowired
-    public NoteController(NoteService noteService) {
-        this.noteService = noteService;
-    }
 
-    @GetMapping("/list")
-    public String listNotes(Model model) {
-        List<Note> note = noteService.listAll();
-        model.addAttribute("note",  note);
-        model.addAttribute("newNote", new Note());
-        return "main-page";//notes/note
-    }
     @GetMapping("/create")
     public String createNote() {
         return "creating-new-node-page";
@@ -36,8 +25,8 @@ public class NoteController {
 
     @PostMapping("/create")
     public String createNote(@ModelAttribute Note newNote) {
-       noteService.creatNote(newNote);
-        return "redirect:/note/list";
+       noteService.createNote(newNote);
+        return "redirect:/note/search";
     }
 
     @GetMapping("/edit")
@@ -50,14 +39,20 @@ public class NoteController {
     @PostMapping("/edit")
     public String updateNote(@ModelAttribute("note") Note note) {
         noteService.update(note);
-        return "redirect:/note/list";
+        return "redirect:/note/search";
     }
 
     @PostMapping("/delete")
-    public String deleteNote(@RequestParam("id") long id) {
+    public String deleteNote(@RequestParam("id") Long id) {
         noteService.deleteById(id);
-        return "redirect:/note/list";
+        return "redirect:/note/search";
     }
-}
+    @GetMapping("/search")
+    public String searchNotes(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
+        List<Note> notes = (keyword != null && !keyword.isEmpty()) ? noteService.searchNotes(keyword) : noteService.listAll();
+        model.addAttribute("note", notes);
+        return "main-page";
+       }
+    }
 
 

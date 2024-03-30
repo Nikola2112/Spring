@@ -1,46 +1,64 @@
 package com.goit.Spring.Boot.controllers;
+
+/*
 import com.goit.Spring.Boot.services.NoteService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
 import com.goit.Spring.Boot.entities.Note;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.util.List;
 import java.util.Optional;
-/*
+
+
 @RestController
 @RequestMapping("/note")
-public class NoteControllerJSON {
+@RequiredArgsConstructor
+public class NoteController {
 
     private final NoteService noteService;
 
-    @Autowired
-    public NoteControllerJSON(NoteService noteService) {
-        this.noteService = noteService;
-    }
-
-    @GetMapping()
-    public List<Note> listNotes() {
-        return noteService.listAll();
+    @GetMapping("/create")
+    public String createNote() {
+        return "creating-new-node-page";
     }
 
     @PostMapping("/create")
-    public Note createNote(@RequestBody Note newNote) {
-        return noteService.creatNote(newNote);
+    public ResponseEntity<String> createNote(@RequestBody Note newNote) {
+        noteService.createNote(newNote);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Note created successfully");
     }
 
-    @GetMapping("/edit")
-    public Optional<Note> editNote(@RequestParam("id") long id) {
-        return noteService.getById(id);
+    @GetMapping("/edit/{id}")
+    public ResponseEntity<Note> editNote(@PathVariable("id") long id) {
+        Optional<Note> note = noteService.getById(id);
+        return note.map(ResponseEntity::ok)
+                   .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/edit")
-    public Note updateNote(@RequestBody Note note) {
-        return noteService.update(note);
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<String> updateNote(@PathVariable("id") long id, @RequestBody Note note) {
+        if (!noteService.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        note.setId(id);
+        noteService.update(note);
+        return ResponseEntity.ok("Note updated successfully");
     }
 
-    @DeleteMapping("/delete")
-    public void deleteNote(@RequestParam("id") long id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteNote(@PathVariable("id") Long id) {
+        if (!noteService.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
         noteService.deleteById(id);
+        return ResponseEntity.ok("Note deleted successfully");
     }
-} */
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Note>> searchNotes(@RequestParam(value = "keyword", required = false) String keyword) {
+        List<Note> notes = (keyword != null && !keyword.isEmpty()) ? noteService.searchNotes(keyword) : noteService.listAll();
+        return ResponseEntity.ok(notes);
+    }
+}
+ */
