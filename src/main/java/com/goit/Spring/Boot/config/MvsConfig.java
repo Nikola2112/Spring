@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+// класс налаштування маршрутизації веб-додатка на основі Spring MVC
 @Configuration
 public class MvsConfig implements WebMvcConfigurer {
 

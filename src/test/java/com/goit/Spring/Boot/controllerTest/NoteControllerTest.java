@@ -1,6 +1,6 @@
 package com.goit.Spring.Boot.controllerTest;
 import com.goit.Spring.Boot.controllers.NoteController;
-import com.goit.Spring.Boot.entities.Note;
+import com.goit.Spring.Boot.model.Note;
 import com.goit.Spring.Boot.services.NoteService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -49,9 +48,9 @@ public class NoteControllerTest {
         Model model = mock(Model.class);
         Note note = new Note();
         when(noteService.getById(id)).thenReturn(Optional.of(note));
-        // Инициализируем мок
+        // Ініціалізуєм мок
         MockitoAnnotations.openMocks(this);
-        //  запускаем тест
+        //  запускаємо тест
         String viewName = noteController.editNote(id, model);
         assertEquals("edit-page", viewName);
         verify(model, times(1)).addAttribute(eq("note"), any());

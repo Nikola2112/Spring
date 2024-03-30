@@ -1,5 +1,5 @@
 package com.goit.Spring.Boot.serviceTest;
-import com.goit.Spring.Boot.entities.Note;
+import com.goit.Spring.Boot.model.Note;
 import com.goit.Spring.Boot.repository.NoteRepository;
 import com.goit.Spring.Boot.services.impl.NoteServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,9 +24,11 @@ public class NoteServiceImplTest {
     @InjectMocks
     private NoteServiceImpl noteService;
 
+    // Ініціалізуємо  мок
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.initMocks(this); // инициализируем моки
+        MockitoAnnotations.initMocks(this);
+
     }
 
     @Test

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
+// рестконтроллер - информаціїя о юзері (пароль null) , JSON формат
 @RestController
 @RequestMapping("/api")
 public class UserController {

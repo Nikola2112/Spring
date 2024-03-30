@@ -1,5 +1,5 @@
 package com.goit.Spring.Boot.serviceTest;
-import com.goit.Spring.Boot.entities.Note;
+import com.goit.Spring.Boot.model.Note;
 import com.goit.Spring.Boot.repository.NoteRepository;
 import com.goit.Spring.Boot.services.NoteService;
 import com.goit.Spring.Boot.services.impl.NoteServiceImpl;

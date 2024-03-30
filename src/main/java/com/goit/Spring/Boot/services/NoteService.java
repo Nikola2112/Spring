@@ -1,11 +1,12 @@
 package com.goit.Spring.Boot.services;
 
-import com.goit.Spring.Boot.entities.Note;
+import com.goit.Spring.Boot.model.Note;
 
 
 import java.util.List;
 import java.util.Optional;
 
+// класс визначає які методи буть в сервсі *(поліморфізм)
 public interface NoteService {
 
      List<Note> listAll();

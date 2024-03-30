@@ -10,8 +10,10 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 
 import java.io.IOException;
 
+//класс відповідає за виведдення помилки при авторізації
 @Configuration
 public class AuthenticationFail implements AuthenticationFailureHandler {
+
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         HttpSession session = request.getSession();

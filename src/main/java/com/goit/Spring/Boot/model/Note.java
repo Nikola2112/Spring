@@ -1,13 +1,12 @@
-package com.goit.Spring.Boot.entities;
+package com.goit.Spring.Boot.model;
 
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDate;
 
-
+// модель нотатки
 @Data
 @Entity
 @Table(name = "note")

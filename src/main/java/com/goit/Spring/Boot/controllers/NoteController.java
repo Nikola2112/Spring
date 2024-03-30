@@ -4,11 +4,14 @@ package com.goit.Spring.Boot.controllers;
 import com.goit.Spring.Boot.services.NoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
-import com.goit.Spring.Boot.entities.Note;
+import com.goit.Spring.Boot.model.Note;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
+
+
+// контроллер  для додатка
 
 @Controller
 @RequestMapping("/note")

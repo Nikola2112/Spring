@@ -57,3 +57,5 @@ S
 #.idea/sonarlint/issuestore/index.pb,9/f/9fe84ebb15faf917b7def6236dba604453cc61e0
 ;
 gradlew.bat,2/a/2a45a911a8f1836b0b6c5b758962572012d8f8c3
+b
+2src/main/java/com/goit/Spring/Boot/model/Note.java,8/6/86a7b8ec394a0130870a272365ea0324ae236fe6

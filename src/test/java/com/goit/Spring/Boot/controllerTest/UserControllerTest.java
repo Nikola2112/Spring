@@ -20,8 +20,8 @@ import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-//выдает предупреждение связано с настройками запуска моего тестового окружения и используемой виртуальной машиной Java (JVM).
-//у меня текст не прошел , у вас возможно пройдет
+//Помилка яка вискакує ,може бути пов'язане з конфігурацією моєї тестової середи та використовуваною віртуальною машиною Java (JVM).
+
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
 @SpringBootTest
 @AutoConfigureMockMvc

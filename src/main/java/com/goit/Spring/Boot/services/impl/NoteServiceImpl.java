@@ -1,6 +1,6 @@
 package com.goit.Spring.Boot.services.impl;
 
-import com.goit.Spring.Boot.entities.Note;
+import com.goit.Spring.Boot.model.Note;
 import com.goit.Spring.Boot.repository.NoteRepository;
 import com.goit.Spring.Boot.services.NoteService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
+//класс реалізує інтерфейс , містить логіку оброботки операцій нотаток
 @Service
 @RequiredArgsConstructor
 public class NoteServiceImpl implements NoteService {
@@ -35,7 +35,8 @@ public class NoteServiceImpl implements NoteService {
     public List<Note> searchNotes(String keyword) {
         List<Note> allNotes = repository.findAll();
 
-        // ищем заметки , которые имеют ключевое слово
+        // шукаєм нотатки  , які мають ключове слово(без різниці на написання з великої чи маленької букви)
+        // також можливий пошук по букві(якщо буква є в нотатці то пошук покаже її)
         return allNotes.stream()
                 .filter(note -> {
                     String title = note.getTitle();
@@ -44,10 +45,6 @@ public class NoteServiceImpl implements NoteService {
                             (content != null && content.toLowerCase().contains(keyword.toLowerCase()));
                 })
                 .collect(Collectors.toList());
-//        return allNotes.stream()
-//                .filter(note -> note.getTitle().toLowerCase().contains(keyword.toLowerCase()) ||
-//                        note.getContent().toLowerCase().contains(keyword.toLowerCase()))
-//                .collect(Collectors.toList());
     }
 
 }

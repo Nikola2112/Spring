@@ -15,6 +15,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
+//класс відповідає за те, які сторінки користувач може дивитися без авторизації
 @Configuration
 @EnableWebSecurity
 public class LoginConfig {
